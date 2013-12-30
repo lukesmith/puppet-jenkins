@@ -56,14 +56,14 @@ define jenkins::plugin($version=0) {
         require    => [File[$plugin_dir], Package['wget']],
         path       => ['/usr/bin', '/usr/sbin', '/bin'],
     }
-  }
 
-  file {
-    "${plugin_dir}/${plugin}" :
-      require => Exec["download-${name}"],
-      owner   => 'jenkins',
-      mode    => '0644',
-      notify  => Service['jenkins'];
+    file {
+      "${plugin_dir}/${plugin}" :
+        require => Exec["download-${name}"],
+        owner   => 'jenkins',
+        mode    => '0644',
+        notify  => Service['jenkins'];
+    }
   }
-
+  
 }
